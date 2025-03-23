@@ -46,11 +46,17 @@ function writeBombs(matrix, bombs, dimensions)
         if (
             bomb.position.x >= 0 && bomb.position.x < dimensions.x &&
             bomb.position.y >= 0 && bomb.position.y < dimensions.y &&
-            !["a", "b"].includes(matrix[ bomb.position.y ][ bomb.position.x ]) &&
             !matrix[ bomb.position.y ][ bomb.position.x ].includes("h")
         )
         {
-            matrix[ bomb.position.y ][ bomb.position.x ] += "-h";
+            if (matrix[ bomb.position.y ][ bomb.position.x ] == "a")
+            {
+                matrix[ bomb.position.y ][ bomb.position.x ] = "b";
+            }
+            else
+            {
+                matrix[ bomb.position.y ][ bomb.position.x ] += "-h";
+            }
         }
     })
 }
@@ -58,22 +64,21 @@ function writeBombs(matrix, bombs, dimensions)
 
 /**
  * Generates a matrix representation of the game board.
+ * @description Use this for generating both player and AI maps separatedly.
  * 
- * @param {Board} playerBoard - The board state of the player.
- * @param {Board} botBoard - The board state of the bot.
+ * @param {Board} board - The board state.
  * @param {Vector2} dimensions - The dimensions of the board.
+ * @param {string} name - The identifier to mark the pieces.
  * @returns {string[][]} - The game board as a matrix.
  */
-function exportMap(playerBoard, botBoard, dimensions)
+function exportMap(board, dimensions, name)
 {
     let matrix = Array(dimensions.y)
         .fill()
         .map(()=>Array(dimensions.x).fill("a"));
     
-    writePieces(matrix, playerBoard.pieces, dimensions, "p1");
-    writePieces(matrix, botBoard.pieces, dimensions, "p2");
-    writeBombs(matrix, playerBoard.launchedBombs, dimensions);
-    writeBombs(matrix, botBoard.launchedBombs, dimensions);
+    writePieces(matrix, board.pieces, dimensions, name);
+    writeBombs(matrix, board.launchedBombs, dimensions);
     
     return matrix;
 }
@@ -81,21 +86,23 @@ function exportMap(playerBoard, botBoard, dimensions)
 /**
  * Exports the game board as a JSON string.
  * 
- * @param {Board} playerBoard - The board state of the player.
- * @param {Board} botBoard - The board state of the bot.
+ * @param {Board} board - The board state.
  * @param {Vector2} dimensions - The dimensions of the board.
+ * @param {string} name - The identifier to mark the pieces.
  * @returns {string} - The JSON representation of the game board.
  */
-function exportMapAsJSON(playerBoard, botBoard, dimensions)
+function exportMapAsJSON(board, dimensions, name)
 {
-    return JSON.stringify(exportMap(playerBoard, botBoard, dimensions));
+    return JSON.stringify(exportMap(board, dimensions, name));
 }
 
-/*
+exports.exportMap = exportMap;
+exports.exportMapAsJSON = exportMapAsJSON;
 
+/*
 // USAGE EXAMPLE
 
-const { launchBomb } = require("./shoot");
+const { launchRandomBomb } = require("./bot")
 
 let playerBoard = new Board()
 
@@ -111,9 +118,12 @@ botBoard.pieces = [
     new Piece(new Vector2(2,2), false, 2),
 ]
 
-launchBomb(playerBoard, new Vector2(0,0));
-launchBomb(botBoard, new Vector2(0,0));
+for (let i = 0; i < 5; i++)
+{
+    launchRandomBomb(botBoard, new Vector2(5,5));
+    launchRandomBomb(playerBoard, new Vector2(5,5));
+}
 
-console.log(exportMap(playerBoard, botBoard , new Vector2(5, 5)));
-console.log(exportMapAsJSON(playerBoard, botBoard , new Vector2(5, 5)));
+console.log(exportMap(playerBoard, new Vector2(5, 5), "p1"));
+console.log(exportMapAsJSON(botBoard, new Vector2(5, 5), "p2"));
 */
