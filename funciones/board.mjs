@@ -1,4 +1,4 @@
-const { Piece } = require("./piece")
+import { Piece } from "./piece.mjs";
 
 function isCollide(a, b) {
     return (
@@ -15,7 +15,6 @@ class Board {
 
     /**
      * Says if it's possible to place a new piece in a board without any overlapping.
-     * @param {Board} board The board
      * @param {Piece} piece The new piece
      */
     canPlacePiece(piece) {
@@ -31,4 +30,4 @@ class Board {
     }
 }
 
-exports.Board = Board;
+export { Board }; // ✅ Exportación correcta para ES Modules

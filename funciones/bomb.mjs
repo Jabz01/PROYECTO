@@ -1,10 +1,10 @@
-const { Vector2 } = require("./vector2")
+import Vector2 from "./vector2.mjs";
 
 const BombState = {
     FAILED: 0,
     ADJACENT: 1,
     FIRE_IN_THE_HOLE: 2
-}
+};
 
 class Bomb {
     position = new Vector2(0, 0);
@@ -15,5 +15,5 @@ class Bomb {
     }
 }
 
-exports.BombState = BombState;
-exports.Bomb = Bomb;
+// ✅ Exportación compatible con ES Modules
+export { BombState, Bomb };

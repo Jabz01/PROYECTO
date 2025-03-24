@@ -1,25 +1,22 @@
-const { Vector2 } = require("./vector2")
-const { Board } = require("./board")
-const { Bomb, BombState } = require("./bomb")
-
+import  Vector2 from "./vector2.mjs";
+import { Board } from "./board.mjs";
+import { BombState, Bomb } from "./bomb.mjs";
 
 /**
- * Launchs a bomb in a given position within a board
- * @advice This adds the bomb to the board bomb's array
- * @param {Board} board The board to launch the bomb
- * @param {Vector2} position The coordinates for launching the bomb
- * @returns A new bomb object reference
+ * Lanza una bomba en una posición dentro de un tablero.
+ * @advice Esto agrega la bomba al array de bombas lanzadas del tablero.
+ * @param {Board} board - El tablero donde se lanza la bomba.
+ * @param {Vector2} position - Las coordenadas donde se lanza la bomba.
+ * @returns {Bomb|null} - Una referencia al nuevo objeto bomba, o `null` si la posición ya tenía una bomba.
  */
-function launchBomb(board, position)
-{
+function launchBomb(board, position) {
     let bomb = new Bomb(position);
 
     /**
      * ¿Para qué lanzar una bomba dos veces en el mismo lugar?
      */
-    for (const bomb of board.launchedBombs) {
-        if (bomb.position.x == position.x && bomb.position.y == position.y)
-        {
+    for (const existingBomb of board.launchedBombs) {
+        if (existingBomb.position.x === position.x && existingBomb.position.y === position.y) {
             return null;
         }
     }
@@ -43,12 +40,9 @@ function launchBomb(board, position)
             0
         );
 
-        if (deltaX == 0 && deltaY == 0 && bomb.state != BombState.ADJACENT)
-        {
+        if (deltaX === 0 && deltaY === 0 && bomb.state !== BombState.ADJACENT) {
             bomb.state = BombState.FIRE_IN_THE_HOLE;
-        }
-        else if (deltaX <= 1 && deltaY <= 1)
-        {
+        } else if (deltaX <= 1 && deltaY <= 1) {
             bomb.state = BombState.ADJACENT;
         }
     });
@@ -58,7 +52,8 @@ function launchBomb(board, position)
     return bomb;
 }
 
-exports.launchBomb = launchBomb;
+// ✅ Exportación compatible con ES Modules
+export { launchBomb };
 
 /* EJEMPLO DE USO */
 

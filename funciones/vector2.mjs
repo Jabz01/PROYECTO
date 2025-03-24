@@ -1,5 +1,4 @@
-class Vector2
-{
+export default class Vector2 {
     x = 0;
     y = 0;
 
@@ -8,5 +7,3 @@ class Vector2
         this.y = y;
     }
 }
-
-exports.Vector2 = Vector2;
