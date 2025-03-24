@@ -1,6 +1,6 @@
 import Helpers from './helpers.mjs'
 
-class Personalizacion {
+class Costumization {
 
     static async cargarPaises() { 
         
@@ -23,7 +23,7 @@ class Personalizacion {
     }
 }
 
-Personalizacion.cargarPaises();
+Costumization.cargarPaises();
 
 
 
