@@ -2,7 +2,7 @@ import Helpers from './helpers.mjs'
 
 class Costumization {
 
-    static async cargarPaises() { 
+    static async loadCountries() { 
         
         try {            
             let response = await fetch("http://127.0.0.1:5000/countries");
@@ -23,7 +23,12 @@ class Costumization {
     }
 }
 
-Costumization.cargarPaises();
+class Options {
+    mapSize = new Vector2(0, 0); // vector2.js
+    country = "";
+}
+
+Costumization.loadCountries();
 
 
 
