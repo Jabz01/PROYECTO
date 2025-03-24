@@ -102,7 +102,9 @@ exports.exportMapAsJSON = exportMapAsJSON;
 /*
 // USAGE EXAMPLE
 
-const { launchRandomBomb } = require("./bot")
+const { launchRandomBomb, createBoard } = require("./bot")
+const { canPlacePiece } = require("./board");
+const { launchBomb } = require("./shoot");
 
 let playerBoard = new Board()
 
@@ -118,12 +120,6 @@ botBoard.pieces = [
     new Piece(new Vector2(2,2), false, 2),
 ]
 
-for (let i = 0; i < 5; i++)
-{
-    launchRandomBomb(botBoard, new Vector2(5,5));
-    launchRandomBomb(playerBoard, new Vector2(5,5));
-}
-
-console.log(exportMap(playerBoard, new Vector2(5, 5), "p1"));
-console.log(exportMapAsJSON(botBoard, new Vector2(5, 5), "p2"));
+console.log(exportMapAsJSON(playerBoard, new Vector2(10, 10), "p1"));
+console.log(exportMapAsJSON( createBoard(playerBoard, new Vector2(10, 10)), new Vector2(10, 10), "p1"));
 */

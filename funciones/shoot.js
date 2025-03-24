@@ -2,11 +2,13 @@ const { Vector2 } = require("./vector2")
 const { Board } = require("./board")
 const { Bomb, BombState } = require("./bomb")
 
+
 /**
- * Lanza una bomba en el tablero
- * @param {Board} board Tablero
- * @param {Vector2} position Posición de lanzamiento de la bomba
- * @returns {Bomb | null} Una bomba con su estado de adyacencia calculado para el tablero. Retorna null si no fue posible lanzar la bomba.
+ * Launchs a bomb in a given position within a board
+ * @advice This adds the bomb to the board bomb's array
+ * @param {Board} board The board to launch the bomb
+ * @param {Vector2} position The coordinates for launching the bomb
+ * @returns A new bomb object reference
  */
 function launchBomb(board, position)
 {

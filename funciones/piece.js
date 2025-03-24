@@ -16,6 +16,16 @@ class Piece {
         this.isVertical = isVertical
         this.size = size
     }
+
+    getRect()
+    {
+        return {
+            x: this.position.x,
+            y: this.position.y,
+            width: this.position.x + Math.max(this.isVertical ? 1 : this.size, 0) - this.position.x,
+            height: this.position.y + Math.max(!this.isVertical ? 1 : this.size, 0) - this.position.y
+        }
+    }
 }
 
 exports.PieceType = PieceType;
