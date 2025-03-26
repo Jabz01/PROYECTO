@@ -1,4 +1,4 @@
-import  Vector2  from '../../funciones/vector2.mjs';
+import  Vector2 from "./vector2.mjs";
 
 const PieceType = {
     SUBMARINE: 0,

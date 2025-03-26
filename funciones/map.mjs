@@ -1,7 +1,8 @@
 import { Board } from './board.mjs';
 import { Piece, PieceType } from './piece.mjs';
 import Vector2 from './vector2.mjs';
-import { Bomb, launchBomb } from './bomb.mjs';
+import { Bomb } from './bomb.mjs';
+import { launchBomb } from './shoot.mjs';
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -44,8 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        board.launchedBombs.forEach(bomb => {
-            const cell = document.querySelector(`.cell[data-x="${bomb.position.x}"][data-y="${bomb.position.y}"]`);
+        board.launchedBombs.forEach(Bomb => {
+            const cell = document.querySelector(`.cell[data-x="${Bomb.position.x}"][data-y="${Bomb.position.y}"]`);
             if (cell) {
                 if (cell.textContent === "a") {
                     cell.textContent = "b"; 
