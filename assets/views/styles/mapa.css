@@ -1,25 +1,42 @@
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
 }
 
-.map-title {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-#mapContainer {
-    margin-top: 20px;
-    width: 800px;
-    height: 800px;
-    display: grid; 
-    overflow: hidden;
-    grid-template-rows: repeat(var(--rows), 1fr); 
-    grid-template-columns: repeat(var(--columns), 1fr); 
+#map {
+    display: grid;
+    gap: 2px;
+    border: 2px solid #000;
 }
 
 .cell {
-    background-color: #ADD8E6; 
-    border: 1px solid black; 
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    background-color: #d0e6f7; 
+}
+
+.cell.p1 {
+    background-color: #61dafb; 
+}
+
+.cell.p2 {
+    background-color: #f77373; 
+}
+
+.cell.b {
+    background-color: #ffcccb; 
+}
+
+.cell.hit {
+    background-color: #ff6f61; 
+    color: #000;
 }

@@ -1,44 +1,72 @@
+import { Board } from './board.mjs';
+import { Piece, PieceType } from './piece.mjs';
+import Vector2 from './vector2.mjs';
+import { Bomb, launchBomb } from './bomb.mjs';
+
+
 document.addEventListener("DOMContentLoaded", () => {
-    /**
-     * Generates a visual map for the game as an HTML grid.
-     * 
-     * @param {string} containerId - The ID of the container where the map will be rendered.
-     * @param {number} rows - The number of rows in the map.
-     * @param {number} columns - The number of columns in the map.
-     */
-    function generateInitialMap(containerId, rows, columns) {
-        if (rows < 10 || rows > 20 || columns < 10 || columns > 20 || (rows != columns)) {
-            throw new Error("El tamaño del mapa debe estar entre 10 y 20 para filas y columnas. Y deben ser las mismas filas y columnas.");
-        }
+    console.log("Hellou"); 
 
-        const container = document.getElementById(containerId);
-        if (!container) {
-            throw new Error(`No se encontró el contenedor con ID '${containerId}'.`);
-        }
+    const board = new Board(); 
 
-        container.style.setProperty("--rows", rows);
-        container.style.setProperty("--columns", columns);
+    function createMap(board, size = 10) {
+        const mapElement = document.getElementById("map"); 
 
-        container.innerHTML = "";
-        //Pasa por cada fila 
-        for (let row = 0; row < rows; row++) {
-            //Por cada columna que se haya ingresado se creara un div con la clase "cell" y la que indica su fila y columna
-            for (let column = 0; column < columns; column++) {
-                const cell = document.createElement("div"); 
-                cell.className = `cell cell-${row}-${column}`; 
-                container.appendChild(cell); 
+        mapElement.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+        mapElement.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+
+
+        for (let y = 0; y < size; y++) {
+            for (let x = 0; x < size; x++) {
+                const cell = document.createElement("div");
+                cell.classList.add("cell");
+                cell.dataset.x = x;
+                cell.dataset.y = y;
+                cell.textContent = "a"; 
+                mapElement.appendChild(cell);
             }
         }
+
+        board.pieces.forEach(piece => {
+            let x1 = piece.position.x;
+            let x2 = piece.isVertical ? x1 : x1 + piece.size - 1;
+            let y1 = piece.position.y;
+            let y2 = piece.isVertical ? y1 + piece.size - 1 : y1;
+
+            for (let x = x1; x <= x2; x++) {
+                for (let y = y1; y <= y2; y++) {
+                    const cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
+                    if (cell) {
+                        cell.textContent = "p1";
+                        cell.classList.add("p1");
+                    }
+                }
+            }
+        });
+
+        board.launchedBombs.forEach(bomb => {
+            const cell = document.querySelector(`.cell[data-x="${bomb.position.x}"][data-y="${bomb.position.y}"]`);
+            if (cell) {
+                if (cell.textContent === "a") {
+                    cell.textContent = "b"; 
+                    cell.classList.add("b");
+                } else if (cell.textContent.includes("p1")) {
+                    cell.textContent += "-h"; 
+                    cell.classList.add("hit");
+                } else if (cell.textContent.includes("p2")) {
+                    cell.textContent += "-h";
+                    cell.classList.add("hit");
+                }
+            }
+        });
     }
 
-    document.getElementById("generateMapButton").addEventListener("click", () => {
-        const rows = parseInt(document.getElementById("rowsInput").value);
-        const columns = parseInt(document.getElementById("columnsInput").value);
-        try {
-            generateInitialMap("mapContainer", rows, columns);
-        } catch (error) {
-            console.error(error.message);
-            alert(error.message);
-        }
-    });
+    board.pieces.push(new Piece(new Vector2(2, 3), false, 4, PieceType.SHIP)); 
+    board.pieces.push(new Piece(new Vector2(5, 5), true, 3, PieceType.SUBMARINE)); 
+
+    launchBomb(board, new Vector2(6, 5)); 
+    launchBomb(board, new Vector2(8, 8)); 
+
+
+    createMap(board, 10);
 });
