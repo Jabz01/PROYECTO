@@ -20,7 +20,6 @@ class Customization {
             document.querySelector('#countries').innerHTML = `<option>Error al cargar países</option>`;
         }
     }
-
 }
 
 class Options {
