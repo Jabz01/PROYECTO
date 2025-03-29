@@ -2,8 +2,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
 }
 
 #map {
@@ -21,22 +19,21 @@
     font-size: 14px;
     font-weight: bold;
     border: 1px solid #ccc;
-    background-color: #d0e6f7; 
 }
 
-.cell.p1 {
-    background-color: #61dafb; 
-}
-
-.cell.p2 {
-    background-color: #f77373; 
+.cell.a {
+    background-color: #d0e6f7;
 }
 
 .cell.b {
-    background-color: #ffcccb; 
+    background-color: #ffcccb;
 }
 
-.cell.hit {
-    background-color: #ff6f61; 
-    color: #000;
+.cell.p1 {
+    background-color: #1d4f91;
 }
+
+.cell.p1-h {
+    background-color: #ff4040; 
+}
+
