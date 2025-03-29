@@ -34,7 +34,7 @@ export default class Helpers {
 
           let [codigo, nombre] = entry;
           let option = document.createElement("option");
-          option.value = codigo;
+          option.value = codigo.toUpperCase();
           option.textContent = nombre;
           select.appendChild(option);
       });
