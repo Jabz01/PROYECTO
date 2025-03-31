@@ -1,29 +1,33 @@
 import { Board } from './board.mjs';
 import { Piece } from './piece.mjs';
 import Vector2 from './vector2.mjs';
-
 document.addEventListener("DOMContentLoaded", () => {
     const buttonDirection = document.getElementById("buttonDirection");
+    const buttonReboot = document.getElementById("buttonReboot");
+    const textReboot = document.getElementById("textReboot");
     let isVertical = false;
-    const SHIPS_TO_PLACE = [
+    let mapSize = 10; //Ejemplo pero este se debe globalizar
+    
+    let SHIPS_TO_PLACE = [
         { size: 5, count: 1 },
         { size: 4, count: 1 },
         { size: 3, count: 2 },
         { size: 2, count: 2 }
     ];
 
-    let shipIndex = 0; // Para rastrear el índice actual del barco
+    let shipIndex = 0;
     const board = new Board();
 
-    // Crear el tablero y manejar los clics de usuario para colocar barcos
-    function createMap(board, size) {
+    function createMap(mapSize) {
         const mapElement = document.getElementById("map");
 
-        mapElement.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
-        mapElement.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+        mapElement.innerHTML = "";
 
-        for (let y = 0; y < size; y++) {
-            for (let x = 0; x < size; x++) {
+        mapElement.style.gridTemplateColumns = `repeat(${mapSize}, 1fr)`;
+        mapElement.style.gridTemplateRows = `repeat(${mapSize}, 1fr)`;
+
+        for (let y = 0; y < mapSize; y++) {
+            for (let x = 0; x < mapSize; x++) {
                 const cell = document.createElement("div");
                 cell.classList.add("cell", "a");
                 cell.dataset.x = x;
@@ -36,35 +40,53 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Función para colocar barcos
+    let alarm = true;
     function placeShip(x, y) {
-        const size = getSizePiece();
-
+        let size = getSizePiece();
+        let OutOfCorner = isVertical   //Toma tamaño de la pieza junto su posición en x o y
+            ? y + size > mapSize       //Segun si es vertical o no y lo compara con el  
+            : x + size > mapSize;      //Tamaño del mapa para decir si se sale de la esquina
+            
         if (size === null) {
-            console.log("No quedan barcos por colocar.");
+            if(alarm) {
+                alarm = false;
+                alert("Ya no hay más barcos por colocar."); 
+            }
             return;
         }
-
+        if (OutOfCorner) {
+            alert("El barco no se puede poner en esa posición, esta fuera de la esquina.");
+            return;
+        }
+        
+        
         const newPiece = new Piece(new Vector2(x, y), isVertical, size);
-
         // Verificar si el barco puede colocarse
         if (!board.canPlacePiece(newPiece)) {
             alert("No se puede colocar el barco en esta posición.");
             return;
         }
-
+        
+        
+        
+        
         board.pieces.push(newPiece);
         renderThePiece(board);
         updateShipCount();
+        if (board.pieces.length == 1) {
+            buttonReboot.classList.add("visibility");
+        } 
+        
+        buttonRebootAppear();
     }
 
     // Obtener el tamaño del barco actual según el índice
     function getSizePiece() {
         if (shipIndex >= SHIPS_TO_PLACE.length) {
-            alert("Ya no hay más barcos por colocar.");
             return null;
         }
 
-        const currentShip = SHIPS_TO_PLACE[shipIndex];
+        let currentShip = SHIPS_TO_PLACE[shipIndex];
 
         if (currentShip.count > 0) {
             return currentShip.size;
@@ -109,10 +131,29 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    function RebootPieces() {
+        shipIndex = 0;
+        board.pieces = []; 
+        alarm = true; 
+        createMap(mapSize); 
+        SHIPS_TO_PLACE = [
+            { size: 5, count: 1 },
+            { size: 4, count: 1 },
+            { size: 3, count: 2 },
+            { size: 2, count: 2 }
+        ];
+        buttonReboot.classList.remove("visibility");
+    }
+
+
+
+
+
     // Agregar evento al botón para cambiar la dirección del barco
     buttonDirection.addEventListener("click", ChangeDirection);
+    buttonReboot.addEventListener("click", RebootPieces);
 
-    createMap(board, 10);
+    createMap(mapSize);
 });
     /*         board.launchedBombs.forEach(bomb => {
                 const cell = document.querySelector(`.cell[data-x="${bomb.position.x}"][data-y="${bomb.position.y}"]`);

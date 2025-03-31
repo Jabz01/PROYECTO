@@ -8,6 +8,7 @@
     display: grid;
     gap: 2px;
     border: 2px solid #000;
+    margin: 10px;
 }
 
 .cell {
@@ -36,4 +37,16 @@
 .cell.p1-h {
     background-color: #ff4040; 
 }
+
+#buttonReboot, #textReboot {
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+}
+
+#buttonReboot.visibility, #textReboot.visibility {
+    opacity: 1;
+    visibility: visible;
+}
+
 
