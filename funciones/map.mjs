@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (board.pieces.length == 1) {
             buttonReboot.classList.add("visibility");
         } 
-        
+
         buttonRebootAppear();
     }
 
@@ -99,22 +99,29 @@ document.addEventListener("DOMContentLoaded", () => {
     // Actualizar el tablero después de colocar un barco
     function renderThePiece(board) {
         board.pieces.forEach(piece => {
-            let x1 = piece.position.x;
-            let x2 = piece.isVertical ? x1 : x1 + piece.size - 1;
-            let y1 = piece.position.y;
-            let y2 = piece.isVertical ? y1 + piece.size - 1 : y1;
-
+            let x1 = piece.position.x; // Coordenada inicial X
+            let y1 = piece.position.y; // Coordenada inicial Y
+            let x2 = piece.isVertical ? x1 : x1 + piece.size - 1; // Coordenada final X
+            let y2 = piece.isVertical ? y1 + piece.size - 1 : y1; // Coordenada final Y
+    
             for (let x = x1; x <= x2; x++) {
                 for (let y = y1; y <= y2; y++) {
                     const cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
                     if (cell) {
+                        cell.classList.add("piece", "p1");
                         cell.classList.remove("a");
-                        cell.classList.add("p1");
+                        // Añadir clases específicas para las esquinas
+                        if (x === x1 && y === y1) {
+                            cell.classList.add(piece.isVertical ? "vertical" : "horizontal", "start");
+                        } else if (x === x2 && y === y2) {
+                            cell.classList.add(piece.isVertical ? "vertical" : "horizontal", "end");
+                        }
                     }
                 }
             }
         });
     }
+
 
     // Cambiar la dirección del barco (vertical/horizontal)
     function ChangeDirection() {
@@ -136,6 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
         board.pieces = []; 
         alarm = true; 
         createMap(mapSize); 
+        isVertical = false;
         SHIPS_TO_PLACE = [
             { size: 5, count: 1 },
             { size: 4, count: 1 },
@@ -143,6 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
             { size: 2, count: 2 }
         ];
         buttonReboot.classList.remove("visibility");
+        buttonDirection.textContent = "Dirección: Horizontal";
     }
 
 
