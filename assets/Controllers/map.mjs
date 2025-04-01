@@ -1,6 +1,6 @@
-import { Board } from './board.mjs';
-import { Piece } from './piece.mjs';
-import Vector2 from './vector2.mjs';
+import { Board } from '../../funciones/board.mjs';
+import { Piece } from '../../funciones/piece.mjs';
+import Vector2 from '../../funciones/vector2.mjs';
 document.addEventListener("DOMContentLoaded", () => {
     const buttonDirection = document.getElementById("buttonDirection");
     const buttonReboot = document.getElementById("buttonReboot");
@@ -66,10 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("No se puede colocar el barco en esta posición.");
             return;
         }
-        
-        
-        
-        
         board.pieces.push(newPiece);
         renderThePiece(board);
         updateShipCount();
