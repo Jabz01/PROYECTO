@@ -1,35 +1,46 @@
-import MapRender from '../../funciones/mapRenderer.mjs';
+import Game from '../../funciones/game.mjs';
 
 document.addEventListener("DOMContentLoaded", () => {
     const buttonDirection = document.getElementById("buttonDirection");
     const buttonReboot = document.getElementById("buttonReboot");
+    const buttonStartGame = document.getElementById("buttonStartGame");
+    const gameController = new Game("userMap", "", 10);
 
-    const USER_MAP = new MapRender("map", 10, true, false, true);
-
-    // Cambiar la dirección del barco (vertical/horizontal)
-    function ChangeDirection() {
-        USER_MAP.isVertical = !USER_MAP.isVertical; 
-        buttonDirection.textContent = USER_MAP.isVertical
+    // Cambiar la dirección del barco
+    buttonDirection.addEventListener("click", () => {
+        gameController.userMap.isVertical = !gameController.userMap.isVertical;
+        buttonDirection.textContent = gameController.userMap.isVertical
             ? "Dirección: Vertical"
             : "Dirección: Horizontal";
 
-        buttonDirection.classList.toggle("horizontal", !USER_MAP.isVertical);
-        buttonDirection.classList.toggle("vertical", USER_MAP.isVertical);
-    }
+        buttonDirection.classList.toggle("horizontal", !gameController.userMap.isVertical);
+        buttonDirection.classList.toggle("vertical", gameController.userMap.isVertical);
+    });
 
-    // Reiniciar las piezas y el tablero
-    function RebootPieces() {
-        USER_MAP.RebootPieces(); 
+    // Reiniciar el mapa
+    buttonReboot.addEventListener("click", () => {
+        gameController.userMap.RebootPieces(); // Reiniciar el mapa del usuario
         buttonDirection.textContent = "Dirección: Horizontal";
-        
-    }
+    });
 
-    // Agregar eventos a los botones
-    buttonDirection.addEventListener("click", ChangeDirection);
-    buttonReboot.addEventListener("click", RebootPieces);
+    buttonStartGame.addEventListener("click", () => {
+        if (gameController.userMap.hasPlacedAllShips()) {
+            const userMapState = gameController.userMap.saveMapState(); // Guardar el estado del mapa del usuario
+            console.log("Estado del mapa del usuario guardado:", userMapState);
+    
+            // Pasar el estado del mapa al controlador del juego
+            gameController.loadUserMapState(userMapState);
+    
+        } else {
+            alert("Por favor, coloca todos los barcos antes de iniciar el juego.");
+        }
+    });
+    
 
-    USER_MAP.mapRender(); 
+    //Usamos gameController para crear el map, y así tener el codigo del mapa en un solo espacio
+    gameController.render();
 });
+
     /*         board.launchedBombs.forEach(bomb => {
                 const cell = document.querySelector(`.cell[data-x="${bomb.position.x}"][data-y="${bomb.position.y}"]`);
                 if (cell) {

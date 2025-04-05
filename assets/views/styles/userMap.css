@@ -4,22 +4,45 @@
     align-items: center;
 }
 
-#map {
+#userMap {
     display: grid;
-    gap: 2px;
+    gap: 2px; 
     border: 2px solid #000;
     margin: 10px;
+    width: 100%; 
+    max-width: 500px; 
+    aspect-ratio: 1; 
 }
 
 .cell {
-    width: 30px;
-    height: 30px;
+    width: 100%; 
+    height: auto; 
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 14px;
+    font-size: 1rem; 
     font-weight: bold;
     border: 1px solid #ccc;
+}
+
+@media (max-width: 768px) {
+    #userMap {
+        max-width: 350px; 
+    }
+
+    .cell {
+        font-size: 0.9rem; 
+    }
+}
+
+@media (max-width: 480px) {
+    #userMap {
+        max-width: 300px; 
+    }
+
+    .cell {
+        font-size: 0.8rem;
+    }
 }
 
 .cell.a {
@@ -37,9 +60,6 @@
 .cell.p1-h {
     background-color: #ff4040; 
 }
-
-
-
 
 
 .cell.piece.vertical.start {

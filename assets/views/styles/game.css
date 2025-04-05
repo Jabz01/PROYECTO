@@ -1,0 +1,92 @@
+/* Estilos generales */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    overflow: hidden; /* Evita el scroll */
+}
+
+/* Contenedor principal */
+.container-fluid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 0;
+}
+
+/* Estilo de los mapas */
+.map {
+    display: grid;
+    gap: 2px;
+    border: 2px solid #000;
+}
+
+#botMap {
+    grid-template-columns: repeat(10, 1fr); /* Mapa más grande */
+    grid-template-rows: repeat(15, 1fr);
+    width: 80vw;
+    height: 80vw; /* Cuadrado dinámico basado en el ancho de la ventana */
+    max-width: 600px; /* Límite máximo para pantallas grandes */
+    max-height: 600px;
+}
+
+#userMap {
+    grid-template-columns: repeat(10, 1fr); /* Mapa más pequeño */
+    grid-template-rows: repeat(10, 1fr);
+    width: 60vw;
+    height: 60vw; /* Cuadrado dinámico basado en el ancho de la ventana */
+    max-width: 400px; /* Límite máximo para pantallas grandes */
+    max-height: 400px;
+}
+
+/* Celdas del mapa */
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    background-color: #d0e6f7; /* Color por defecto */
+}
+
+.cell.a { background-color: #d0e6f7; } /* Celdas de agua */
+.cell.b { background-color: #ffcccb; } /* Celdas atacadas */
+.cell.p1 { background-color: #1d4f91; } /* Celdas con barcos */
+.cell.p1-h { background-color: #ff4040; } /* Celdas con barcos dañados */
+
+/* Esquinas redondeadas para barcos */
+.cell.piece.vertical.start {
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+}
+
+.cell.piece.vertical.end {
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+
+.cell.piece.horizontal.start {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+
+.cell.piece.horizontal.end {
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    #botMap, #userMap {
+        width: 90vw;
+        height: 90vw; /* Asegurar que se ajuste a pantallas pequeñas */
+    }
+
+    .cell {
+        font-size: 10px; /* Reducir tamaño del texto en celdas */
+    }
+}

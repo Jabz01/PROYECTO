@@ -3,7 +3,7 @@ import { Piece } from './piece.mjs';
 import Vector2 from './vector2.mjs';
 
 export default class MapRender {
-    constructor(mapId, mapSize = 10, isUserMap = true, isVertical = false, alarm = true) {
+    constructor(mapId, mapSize, isUserMap = true, isVertical = false, alarm = true) {
         this.mapId = mapId; // ID del elemento HTML que contendrá el mapa
         this.mapSize = mapSize; // Tamaño del mapa (ancho y alto en celdas)
         this.isUserMap = isUserMap; // Si el mapa es del usuario
@@ -22,29 +22,32 @@ export default class MapRender {
     // Método para renderizar el mapa en el HTML
     mapRender() {
         const mapElement = document.getElementById(this.mapId);
-
+    
         if (!mapElement) {
             console.error(`No se encontró el elemento con id "${this.mapId}".`);
             return;
         }
-
-        mapElement.innerHTML = "";
-        mapElement.style.gridTemplateColumns = `repeat(${this.mapSize}, 1fr)`;
-        mapElement.style.gridTemplateRows = `repeat(${this.mapSize}, 1fr)`;
-
+    
+        mapElement.innerHTML = ""; // Vaciar el contenedor antes de renderizar
+        mapElement.style.gridTemplateColumns = `repeat(${this.mapSize}, 1fr)`; 
+        mapElement.style.gridTemplateRows = `repeat(${this.mapSize}, 1fr)`; 
+    
         for (let y = 0; y < this.mapSize; y++) {
             for (let x = 0; x < this.mapSize; x++) {
                 const cell = document.createElement("div");
                 cell.classList.add("cell", "a");
                 cell.dataset.x = x;
                 cell.dataset.y = y;
-
-                // Asociar el evento de clic para colocar barcos
-                cell.addEventListener("click", () => this.placeShip(x, y));
+    
+                if (this.isUserMap) {
+                    cell.addEventListener("click", () => this.placeShip(x, y));
+                }
+    
                 mapElement.appendChild(cell);
             }
         }
     }
+    
 
     // Método para colocar barcos
     placeShip(x, y) {
@@ -81,6 +84,7 @@ export default class MapRender {
         }
 
         this.updateShipCount();
+
     }
 
     // Verificar si un barco estaría fuera de los límites
@@ -135,6 +139,7 @@ export default class MapRender {
                             );
                         }
                     }
+                    
                 }
             }
         });
@@ -163,4 +168,20 @@ export default class MapRender {
         this.isVertical = false;
         this.alarm = true;
     }
+
+        // Método para verificar si todos los barcos han sido colocados
+    hasPlacedAllShips() {
+        return this.shipIndex >= this.SHIPS_TO_PLACE.length;
+    }
+
+    // Método para guardar el estado del mapa (posiciones de las piezas)
+    saveMapState() {
+        return this.board.pieces.map(piece => ({
+            x: piece.position.x,
+            y: piece.position.y,
+            isVertical: piece.isVertical,
+            size: piece.size
+        }));
+    }
+
 }
