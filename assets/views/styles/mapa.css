@@ -38,16 +38,7 @@
     background-color: #ff4040; 
 }
 
-#buttonReboot, #textReboot {
-    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-    opacity: 0;
-    visibility: hidden;
-}
 
-#buttonReboot.visibility, #textReboot.visibility {
-    opacity: 1;
-    visibility: visible;
-}
 
 
 
@@ -69,5 +60,23 @@
 .cell.piece.horizontal.end {
     border-top-right-radius: 50%;
     border-bottom-right-radius: 50%;
+}
+
+#buttonDirection.horizontal {
+    background-color: #4caf50; 
+}
+
+#buttonDirection.vertical {
+    background-color: #2196f3; 
+}
+
+#buttonDirection::before {
+    content: "→"; 
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+#buttonDirection.vertical::before {
+    content: "↓"; 
 }
 
