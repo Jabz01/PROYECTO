@@ -13,7 +13,7 @@ function saveUserMapState(userMapState) {
  * Función para cargar el estado de las pieces del usuario desde local storage.
  * @returns {Array|null} Estado del mapa o null si no existe.
  */
-function PiecesState() {
+function loadUserMapState() {
     const savedState = localStorage.getItem('userMapState');
     return savedState ? JSON.parse(savedState) : null;
 }
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-export { PiecesState };
+export { loadUserMapState, saveUserMapState };
 
     /*         board.launchedBombs.forEach(bomb => {
                 const cell = document.querySelector(`.cell[data-x="${bomb.position.x}"][data-y="${bomb.position.y}"]`);

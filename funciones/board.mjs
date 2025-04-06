@@ -28,6 +28,34 @@ class Board {
         }
         return true;
     }
+
+    renderOn(mapID, mapSize, customListener = null) {
+        const mapElement = document.getElementById(mapID);
+    
+        if (!mapElement) {
+            console.error(`No se encontró el elemento con id "${mapID}".`);
+            return;
+        }
+    
+        mapElement.innerHTML = ""; // Vaciar el contenedor antes de renderizar
+        mapElement.style.gridTemplateColumns = `repeat(${mapSize}, 1fr)`; 
+        mapElement.style.gridTemplateRows = `repeat(${mapSize}, 1fr)`; 
+    
+        for (let y = 0; y < mapSize; y++) {
+            for (let x = 0; x < mapSize; x++) {
+                const cell = document.createElement("div");
+                cell.classList.add("cell", "a");
+                cell.dataset.x = x;
+                cell.dataset.y = y;
+    
+                if (customListener) {
+                    cell.addEventListener("click", () => customListener(x, y));
+                }
+    
+                mapElement.appendChild(cell);
+            }
+        }
+    }
 }
 
 export { Board }; // ✅ Exportación correcta para ES Modules

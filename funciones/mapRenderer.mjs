@@ -3,7 +3,7 @@ import { Piece } from './piece.mjs';
 import Vector2 from './vector2.mjs';
 
 export default class MapRender {
-    constructor(mapId, mapSize, isUserMap = true, isVertical = false, alarm = true) {
+    constructor(mapId, mapSize, isUserMap = true, isVertical = false, alarm = true, editable = true) {
         this.mapId = mapId; // ID del elemento HTML que contendrá el mapa
         this.mapSize = mapSize; // Tamaño del mapa (ancho y alto en celdas)
         this.isUserMap = isUserMap; // Si el mapa es del usuario
@@ -39,7 +39,7 @@ export default class MapRender {
                 cell.dataset.x = x;
                 cell.dataset.y = y;
     
-                if (this.isUserMap) {
+                if (this.isUserMap && this.editable) {
                     cell.addEventListener("click", () => this.placeShip(x, y));
                 }
     
@@ -51,6 +51,11 @@ export default class MapRender {
 
     // Método para colocar barcos
     placeShip(x, y) {
+        if (!this.editable)
+        {
+            return
+        }
+        
         const size = this.getSizePiece();
         const outOfBounds = this.isOutOfBounds(x, y, size);
         const canPlace = this.board.canPlacePiece(
