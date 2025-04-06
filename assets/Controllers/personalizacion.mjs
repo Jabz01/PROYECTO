@@ -44,6 +44,11 @@ class Options {
     }
 }
 
+document.querySelector("#rows").addEventListener("change", async (e) => {
+    let value = document.querySelector("#rows").value;
+    document.getElementById("row-number").innerHTML = value + "x" + value
+})
+
 document.querySelector(".play").addEventListener("click", async (e) => {
     e.preventDefault();
 
