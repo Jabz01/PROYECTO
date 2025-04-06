@@ -1,27 +1,7 @@
 import  Helpers  from './helpers.mjs'
 import Vector2 from '../../funciones/vector2.mjs';
 
-class Customization {
-    static async loadCountries() { 
-        try {            
-            let response = await fetch("http://127.0.0.1:5000/countries");
-
-            if (!response.ok) {
-                throw new Error(`Error HTTP: ${response.status}`);
-            }
-
-            let data = await response.json();
-            console.log(data);
-
-            Helpers.fullSelectors("#countries", data, "Click para Expandir");
-            
-        } catch (error) {
-            console.error("Error cargando países:", error);
-            document.querySelector('#countries').innerHTML = `<option>Error al cargar países</option>`;
-        }
-    }
-
-}
+Helpers.loadCountries();
 
 class Options {
     constructor() {
@@ -42,10 +22,6 @@ class Options {
         return parseInt(document.querySelector('#rows').value) || 0;
     }
     
-    static getColumns() {
-        return parseInt(document.querySelector("#columns").value) || 0;
-    }
-
     static getCountry() {
         return document.querySelector("#countries").value;
     }
@@ -75,14 +51,12 @@ document.querySelector(".play").addEventListener("click", async (e) => {
     let options = new Options();
 
     // Obtener valores del formulario y asignarlos a la instancia
-    options.mapSize = new Vector2(Options.getRows(), Options.getColumns()); // ✅ Corrección aquí
+    options.mapSize = new Vector2(Options.getRows(), Options.getRows()); // ✅ Corrección aquí
     options.country = Options.getCountry();
 
     // Mostrar los valores en consola para verificar
     console.log("Map Size:", options.mapSize);
     console.log("Country:", options.country);
 });
-
-Customization.loadCountries();
 
 export { Options };
