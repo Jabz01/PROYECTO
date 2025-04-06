@@ -36,6 +36,7 @@ export default class MapRender {
             for (let x = 0; x < this.mapSize; x++) {
                 const cell = document.createElement("div");
                 cell.classList.add("cell", "a");
+                cell.classList.add((x + y) % 2 ? "even-cell" : "odd-cell", "a");
                 cell.dataset.x = x;
                 cell.dataset.y = y;
     
