@@ -48,10 +48,6 @@ body {
     font-weight: bold;
 }
 
-#usersMap:nth-child(even) {
-    background-color: #000 !important;
-}
-
 @media (max-width: 768px) {
     #userMap {
         max-width: 350px; 
