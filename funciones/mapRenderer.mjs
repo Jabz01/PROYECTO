@@ -183,5 +183,14 @@ export default class MapRender {
             size: piece.size
         }));
     }
+    loadUserMapState(state) {
+        this.board.pieces = state.map(piece => ({
+            position: new Vector2(piece.x, piece.y),
+            isVertical: piece.isVertical,
+            size: piece.size
+        }));
+        this.renderThePiece(); // Renderizar las piezas cargadas
+    }
+
 
 }
