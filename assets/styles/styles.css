@@ -1,0 +1,85 @@
+/*
+    APP GENERAL STYLES HERE
+*/
+
+.register-logo {
+    width: 200px;
+    height: 200px;
+    background-image: url("./../img/game-logo.png");
+    background-size: contain;
+    margin: auto;
+    -webkit-box-shadow: 0px 7px 23px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 7px 23px -9px rgba(0,0,0,0.75);
+    box-shadow: 0px 7px 23px -9px rgba(0,0,0,0.75);
+    border-radius: 5px;
+}
+
+.register-title {
+    color: white;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.register-background {
+    background-image: url("./../img/normandia.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 20px;
+    height: 100vh;
+}
+
+.flag-icon[src=""] {
+    display: none;
+}
+
+.flag-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.flag-icon:has(+select) {
+    margin-right: 10px;
+}
+
+.form-card {
+    max-width: 600px;
+    backdrop-filter: blur(5px) brightness(80%);
+    padding: 10px;
+    -webkit-box-shadow: -9px 10px 23px -23px rgba(0,0,0,0.75);
+    -moz-box-shadow: -9px 10px 23px -23px rgba(0,0,0,0.75);
+    box-shadow: -9px 10px 23px -23px rgba(0,0,0,0.75);
+    border-radius: 5px;
+    border: 1px solid white;
+}
+
+.form-label {
+    color: white;
+    font-weight: bolder;
+}
+
+.form-label:has(+input)
+{
+    display:block;
+    margin-bottom: 5px;
+    margin-left: 3px;
+}
+
+.form-text-field, .form-select-field  {
+    color: white !important;
+    background-color: #00000073 !important;
+    border: none;
+    backdrop-filter: blur(20px);
+}
+
+.form-submit-button {
+    margin-top: 20px;
+    background-color: var(--color-highlight);
+    color: white;
+}
+
+.form-submit-button:hover {
+    background-color: rgba(0, 22, 146, 0.281);
+    border: 1px solid white;
+}

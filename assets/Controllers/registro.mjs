@@ -12,7 +12,11 @@ document.querySelector("#register").addEventListener("click", async (e) => {
     newUser.nickname = User.getNick();
 
     newUser.country = User.getCountry();
-})
 
-Regist.loadCountries();
+    if ([newUser.nickname, newUser.country].includes(""))
+    {
+        alert("Rellena los campos requeridos");
+        return
+    }
+})
  
