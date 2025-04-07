@@ -8,11 +8,11 @@ export default class User{
     }
 
     get Nickname(){
-        return this._nickname
+        return this.nickname
     }
 
     get Country(){
-        return this._country
+        return this.country
     }
 
     static getNick() {
@@ -26,7 +26,7 @@ export default class User{
     // Setters
     set Nickname(value) {
         if (typeof value === "string") {
-            this._nickname = value;
+            this.nickname = value;
         } else {
             throw new Error("Error al registrar el nick.");
         }
@@ -34,7 +34,7 @@ export default class User{
 
     set Country(value) {
         if (typeof value === "string") {
-            this._country = value;
+            this.country = value;
         } else {
             throw new Error("Error al registrar el pais.");
         }

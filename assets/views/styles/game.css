@@ -72,3 +72,7 @@ body {
 #win-message {
     text-align: center;
 }
+
+#weather, #turnIndicator{
+    color: var(--color-light);
+}

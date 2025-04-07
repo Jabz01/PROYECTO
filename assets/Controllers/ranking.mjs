@@ -1,8 +1,8 @@
-class Ranking{
-    static async loadRank(){
+class Ranking {
+    static async loadRank() {
         try {
-            let response = await fetch("http://127.0.0.1:5000/ranking")
-    
+            let response = await fetch("http://127.0.0.1:5000/ranking");
+
             if (!response.ok) {
                 throw new Error(`Error HTTP: ${response.status}`);
             }
@@ -10,6 +10,11 @@ class Ranking{
             let data = await response.json();
 
             let table = document.querySelector("#rank");
+
+            // ✅ Limpiar contenido anterior
+            table.innerHTML = "";
+
+            // ✅ Insertar nuevos datos
             data.forEach((user, index) => {
                 let row = document.createElement("tr");
                 row.innerHTML = `
@@ -20,15 +25,14 @@ class Ranking{
                 `;
                 table.appendChild(row);
             });
-    
-        } catch (error) {
-            console.log("Error al cargar los ranks", error)
-        }
 
+        } catch (error) {
+            console.log("Error al cargar los ranks", error);
+        }
     }
 }
 
-
+// ✅ Cargar ranking al abrir la página
 document.addEventListener("DOMContentLoaded", () => {
     Ranking.loadRank();
 });

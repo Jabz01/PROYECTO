@@ -50,7 +50,6 @@ document.querySelector("#rows").addEventListener("change", async (e) => {
 })
 
 document.querySelector(".play").addEventListener("click", async (e) => {
-    e.preventDefault();
 
     const countrySelect = document.querySelector("#countries");
 
@@ -69,8 +68,6 @@ document.querySelector(".play").addEventListener("click", async (e) => {
     options.country = Options.getCountry();
 
     localStorage.setItem("mapSize", JSON.stringify(options.mapSize));
-
-    window.location.href = "./userMap.html";
 
     // Mostrar los valores en consola para verificar
     console.log("Map Size:", options.mapSize);
