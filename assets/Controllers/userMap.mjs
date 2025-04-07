@@ -2,7 +2,7 @@ import { Board, saveBoard } from '../../funciones/board.mjs';
 import { Piece } from './../../funciones/piece.mjs';
 import Vector2 from './../../funciones/vector2.mjs';
 
-const mapSize = 10;
+let mapSize = 10;
 let userMap = null;
 let isVertical = false;
 const defaultSizes = [2, 2, 3, 3, 4, 5];
@@ -64,6 +64,7 @@ function handleSubmit()
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    mapSize = JSON.parse(localStorage.getItem("mapSize"));
     const buttonDirection = document.getElementById("buttonDirection");
     const buttonReboot = document.getElementById("buttonReboot");
     const buttonStartGame = document.getElementById("buttonStartGame");

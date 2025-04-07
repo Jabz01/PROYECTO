@@ -52,12 +52,25 @@ document.querySelector("#rows").addEventListener("change", async (e) => {
 document.querySelector(".play").addEventListener("click", async (e) => {
     e.preventDefault();
 
+    const countrySelect = document.querySelector("#countries");
+
+
+    // Validación del país
+    if (countrySelect.value === "" || countrySelect.value === "Click para Expandir") {
+        alert("Por favor seleccione un país");
+        return;
+    }
+
     // Crear una nueva instancia de Options
     let options = new Options();
 
     // Obtener valores del formulario y asignarlos a la instancia
     options.mapSize = new Vector2(Options.getRows(), Options.getRows()); // ✅ Corrección aquí
     options.country = Options.getCountry();
+
+    localStorage.setItem("mapSize", JSON.stringify(options.mapSize));
+
+    window.location.href = "./userMap.html";
 
     // Mostrar los valores en consola para verificar
     console.log("Map Size:", options.mapSize);

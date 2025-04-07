@@ -4,7 +4,7 @@ import { launchBomb } from "./../../funciones/shoot.mjs"
 import { createBoard, launchRandomBomb } from "./../../funciones/bot.mjs"
 import { BombState } from '../../funciones/bomb.mjs';
 
-const mapSize = 10;
+let mapSize = 10;
 
 let userMap = null;
 let botMap = null;
@@ -101,6 +101,7 @@ function renderBoards() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    mapSize = JSON.parse(localStorage.getItem("mapSize"));
     userMap = loadBoard();
     botMap = createBoard(userMap, new Vector2(mapSize, mapSize));
 

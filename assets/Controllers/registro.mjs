@@ -26,6 +26,11 @@ document.querySelector("#register").addEventListener("click", async (e) => {
     newUser.nickname = nicknameInput.value.trim();
     newUser.country = countrySelect.value;
 
+    localStorage.setItem("Player",JSON.stringify(newUser));
+
+    window.location.href = "./personalizacion.html";
+
+
     console.log("Usuario registrado:", newUser);
 });
 
