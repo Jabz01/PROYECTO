@@ -141,12 +141,20 @@ function loadBoard(key = "userMapState") {
     const savedState = localStorage.getItem(key);
     let boardData = savedState ? JSON.parse(savedState) : null;
     let board = new Board();
-    board.pieces = boardData.pieces.map(x => {
-        return new Piece(
-            new Vector2(x.position.x, x.position.y), 
-            x.isVertical, x.size);
-    });
-    board.launchedBombs = boardData.launchedBombs;
+    if (boardData == null)
+    {
+        board.pieces = []
+        board.launchedBombs = []
+    }
+    else
+    {
+        board.pieces = boardData.pieces.map(x => {
+            return new Piece(
+                new Vector2(x.position.x, x.position.y), 
+                x.isVertical, x.size);
+        });
+        board.launchedBombs = boardData.launchedBombs;
+    }
     return board;
 }
 
