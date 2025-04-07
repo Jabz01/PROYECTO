@@ -1,0 +1,63 @@
+
+body {
+    background-color: #092635;
+}
+
+#gameTitle {
+    margin-top: 20px;
+    font-size: 2.5rem;
+    color: #5C8374;
+}
+
+#paper {
+    max-width: 500px;
+    width: 100%;
+}
+
+#gameBox {
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.map {
+    width: 50%;
+    max-width: 600px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    gap: 2px;
+}
+
+
+/* Ajustar diseño de botones */
+#buttonsContainer .btn {
+    width: auto; 
+    padding: 10px 20px;
+}
+
+@media (max-width: 768px) {
+    #buttonsContainer .row {
+        flex-direction: column; 
+    }
+
+    #buttonsContainer .btn {
+        margin-bottom: 10px; 
+    }
+}
+
+#playButton, #rankingButton {
+    background-color: #092635;
+    color: #9EC8B9;
+}
+
+#exitButton {
+    background-color:#9EC8B9 ;
+    color: #092635;  
+}
+
+#gameBox {
+    background-color: #1B4242;
+}
+
