@@ -28,6 +28,8 @@ document.querySelector("#register").addEventListener("click", async (e) => {
 
     localStorage.setItem("Player",JSON.stringify(newUser));
 
+    window.location.href = "./home.html"
+
     console.log("Usuario registrado:", newUser);
 });
 
