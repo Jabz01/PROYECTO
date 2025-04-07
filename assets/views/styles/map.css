@@ -1,0 +1,95 @@
+:root {
+    --color-dark: #092635;
+    --color-deep: #1B4242;
+    --color-soft: #5C8374;
+    --color-light: #9EC8B9;
+    --color-highlight: #5e74bd;
+}
+
+.map {
+    border-radius: 10px;
+    overflow: hidden;
+    display: grid;
+    margin: 10px;
+    width: 100%; 
+    max-width: 400px; 
+    aspect-ratio: 1; 
+    background-color: #d0e6f7;
+    -webkit-box-shadow: 0px 7px 23px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 7px 23px -9px rgba(0,0,0,0.75);
+    box-shadow: 0px 7px 23px -9px rgba(0,0,0,0.75);
+}
+
+.cell {
+    width: 100%; 
+    height: auto; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem; 
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .cell {
+        font-size: 0.9rem; 
+    }
+}
+
+@media (max-width: 480px) {
+    .cell {
+        font-size: 0.8rem;
+    }
+}
+
+.cell.a.even-cell {
+    background-color: #d0e6f7;
+}
+
+.cell.a.odd-cell {
+    background-color: #a3d7ff;
+}
+
+.cell.b {
+    background-color: #ffcccb;
+}
+
+.cell.b.odd-cell {
+    background-color: #ff9dc3;
+}
+
+.cell.p1 {
+    background-color: #1d4f91;
+}
+
+.cell.b.fire {
+    background-color: #ff4040; 
+}
+
+.cell.b.adjacent {
+    background-color: #dfffb4; 
+}
+
+.cell.b.adjacent.odd-cell {
+    background-color: #c6ff7b; 
+}
+
+.cell.piece.vertical.start {
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+}
+
+.cell.piece.vertical.end {
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+
+.cell.piece.horizontal.start {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+
+.cell.piece.horizontal.end {
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+}

@@ -54,5 +54,4 @@ function createBoard(playerBoard, dimensions) {
     return botBoard;
 }
 
-// ✅ Exportación compatible con ES Modules
 export { launchRandomBomb, createBoard };
