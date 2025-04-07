@@ -33,7 +33,9 @@ function getPoints(botBoard) {
 
 function registerPoints() {
     let points = getPoints(botBoard);
+    let player = localStorage.getItem("Player")
 
+    // Aquí
 }
 
 function effectiveHits(board) {
@@ -101,7 +103,7 @@ function renderBoards() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    mapSize = JSON.parse(localStorage.getItem("mapSize"));
+    mapSize = JSON.parse(localStorage.getItem("mapSize")).x;
     userMap = loadBoard();
     botMap = createBoard(userMap, new Vector2(mapSize, mapSize));
 

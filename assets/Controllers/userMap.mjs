@@ -64,7 +64,7 @@ function handleSubmit()
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    mapSize = JSON.parse(localStorage.getItem("mapSize"));
+    mapSize = JSON.parse(localStorage.getItem("mapSize")).x;
     const buttonDirection = document.getElementById("buttonDirection");
     const buttonReboot = document.getElementById("buttonReboot");
     const buttonStartGame = document.getElementById("buttonStartGame");
