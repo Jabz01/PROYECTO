@@ -1,82 +1,74 @@
+@font-face {
+    font-family: 'nj-display'; /*a name to be used later*/
+    src: url("./../../fonts/NJ-display.ttf"); /*URL to font*/
+}
+
+:root {
+    --color-dark: #092635;
+    --color-deep: #1B4242;
+    --color-soft: #5C8374;
+    --color-light: #9EC8B9;
+    --color-highlight: #5e74bd;
+}
+
 /* Estilos generales */
 body {
     margin: 0;
-    padding: 0;
+    padding: 10px;
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: var(--color-dark);
+    max-height: 100vh;
 }
 
 .container-fluid {
     height: 90vh;
 }
 
-.map {
-    display: grid;
-    gap: 2px;
-    border: 2px solid #000;
-    width: 100%; 
-    aspect-ratio: 1; 
-}
-
-
-#botMap {
-    width: 80vw;
-    height: 80vw; 
-    max-width: 500px; 
-    max-height: 500px;
-}
-
-#userMap {
-    width: 60vw;
-    height: 60vw; 
-    max-width: 300px; /* Límite máximo para pantallas grandes */
-    max-height: 300px;
-}
-
-.cell {
-    width: 100%; 
-    height: auto; 
+.boards-container {
+    width: 100%;
+    height: 100%;
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    font-size: 1rem; 
-    font-weight: bold;
-    border: 1px solid #ccc;
 }
 
-.cell.a { background-color: #d0e6f7; } /* Celdas de agua */
-.cell.b { background-color: #ffcccb; } /* Celdas atacadas */
-.cell.p1 { background-color: #1d4f91; } /* Celdas con barcos */
-.cell.p1-h { background-color: #ff4040; } /* Celdas con barcos dañados */
-
-/* Esquinas redondeadas para barcos */
-.cell.piece.vertical.start {
-    border-top-left-radius: 50%;
-    border-top-right-radius: 50%;
-}
-
-.cell.piece.vertical.end {
-    border-bottom-left-radius: 50%;
-    border-bottom-right-radius: 50%;
-}
-
-.cell.piece.horizontal.start {
-    border-top-left-radius: 50%;
-    border-bottom-left-radius: 50%;
-}
-
-.cell.piece.horizontal.end {
-    border-top-right-radius: 50%;
-    border-bottom-right-radius: 50%;
-}
-
-@media (max-width: 768px) {
-    #botMap, #userMap {
-        width: 90vw;
-        height: 90vw; 
+@media (max-width: 800px)
+{
+    .boards-container {
+        flex-direction: column-reverse;
+        padding-bottom: 50px;
     }
+}
 
-    .cell {
-        font-size: 10px; 
-    }
+.overlay {
+    background-color: #0000006e;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 50px;
+    font-family: "nj-display";
+    padding: 40px;
+    text-align: center;
+}
+
+.overlay.unabled {
+    opacity: 0;
+    color: transparent;
+    background-color: transparent;
+    pointer-events: none;
+}
+
+#win-message {
+    text-align: center;
 }

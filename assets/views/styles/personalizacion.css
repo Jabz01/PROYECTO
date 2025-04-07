@@ -1,4 +1,150 @@
-img{
-    width: 50%;
-    height: 65%;
+:root {
+    --color-dark: #092635;
+    --color-deep: #1B4242;
+    --color-soft: #5C8374;
+    --color-light: #9EC8B9;
+    --color-highlight: #5e74bd;
+}
+
+body {
+    background-color: var(--color-dark);
+    color: var(--color-light);
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.tittle {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--color-soft);
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+#register {
+    padding: 10px 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-radius: 10px;
+}
+
+.register-logo {
+    width: 200px;
+    height: 200px;
+    background-image: url("./../../img/game-logo.png");
+    background-size: contain;
+    margin: auto;
+    -webkit-box-shadow: 0px 7px 23px -9px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 7px 23px -9px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 7px 23px -9px rgba(0, 0, 0, 0.75);
+    border-radius: 5px;
+}
+
+.register-title {
+    color: white;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.register-background {
+    background-image: url("./../img/normandia.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 20px;
+    height: 100vh;
+}
+
+.flag-icon[src=""] {
+    display: none;
+}
+
+.flag-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.flag-icon:has(+select) {
+    margin-right: 10px;
+}
+
+.form-card {
+    max-width: 600px;
+    backdrop-filter: blur(5px) brightness(80%);
+    padding: 10px;
+    -webkit-box-shadow: -9px 10px 23px -23px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -9px 10px 23px -23px rgba(0, 0, 0, 0.75);
+    box-shadow: -9px 10px 23px -23px rgba(0, 0, 0, 0.75);
+    border-radius: 5px;
+}
+
+.form-label {
+    color: white;
+    font-weight: bolder;
+}
+
+.form-label:has(+input) {
+    display: block;
+    margin-bottom: 5px;
+    margin-left: 3px;
+}
+
+.form-text-field,
+.form-select-field {
+    color: white !important;
+    background-color: #00000073 !important;
+    border: none;
+    backdrop-filter: blur(20px);
+}
+
+.form-submit-button {
+    margin-top: 20px;
+    background-color: var(--color-highlight);
+    color: white;
+}
+
+.form-submit-button:hover {
+    background-color: rgba(0, 22, 146, 0.281);
+    border: 1px solid white;
+}
+
+.form-range::-webkit-slider-thumb {
+    background: var(--color-highlight);
+}
+
+.form-range::-moz-range-thumb {
+    background: var(--color-highlight);
+}
+
+.form-range::-ms-thumb {
+    background: var(--color-highlight);
+}
+
+.slider-section {
+    display: flex;
+    flex-direction:row-reverse;
+    align-items: center;
+    gap: 10px;
+}
+
+#row-number {
+    width: 70px;
+    text-align: center;
+}
+
+.title {
+    margin: auto;
+    text-align: center;
+    margin: 0px;
+    margin-top: 20px;
 }

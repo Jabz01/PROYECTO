@@ -22,27 +22,26 @@ function launchBomb(board, position) {
     }
 
     board.pieces.forEach(piece => {
-        let x1 = piece.position.x;
-        let x2 = piece.position.x + Math.max(piece.isVertical ? 0 : piece.size - 1, 0);
+        let rect = piece.getRect();
 
-        let y1 = piece.position.y;
-        let y2 = piece.position.y + Math.max(!piece.isVertical ? 0 : piece.size - 1, 0);
+        let x1 = rect.x;
+        let y1 = rect.y;
+        let x2 = rect.x + rect.width;
+        let y2 = rect.y + rect.height;
         
-        let deltaX = Math.max(
-            x1 - bomb.position.x,
-            bomb.position.x - x2,
-            0
-        );
-
-        let deltaY = Math.max(
-            y1 - bomb.position.y,
-            bomb.position.y - y2,
-            0
-        );
-
-        if (deltaX === 0 && deltaY === 0 && bomb.state !== BombState.ADJACENT) {
+        if (
+            position.x >= x1 && position.x < x2 &&
+            position.y >= y1 && position.y < y2
+        )
+        {
             bomb.state = BombState.FIRE_IN_THE_HOLE;
-        } else if (deltaX <= 1 && deltaY <= 1) {
+        }
+        else if (
+            position.x >= x1 - 1 && position.x < x2 + 1 &&
+            position.y >= y1 - 1 && position.y < y2 + 1 &&
+            bomb.state != BombState.FIRE_IN_THE_HOLE
+        )
+        {
             bomb.state = BombState.ADJACENT;
         }
     });
@@ -52,7 +51,6 @@ function launchBomb(board, position) {
     return bomb;
 }
 
-// ✅ Exportación compatible con ES Modules
 export { launchBomb };
 
 /* EJEMPLO DE USO */
