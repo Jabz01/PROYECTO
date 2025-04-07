@@ -143,8 +143,8 @@ function renderBoards() {
 
 async function loadClimate() {
     try {
-        let player = JSON.parse(localStorage.getItem("Player"));
-        const countryCode = player.country; 
+        let country = JSON.parse(localStorage.getItem("country"))
+        const countryCode = country; 
         const apiKey = "35ce21796a0bc69f80283e127c511bb5";
 
         const res = await fetch(`https://restcountries.com/v3.1/alpha/${countryCode}`);

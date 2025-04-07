@@ -68,6 +68,7 @@ document.querySelector(".play").addEventListener("click", async (e) => {
     options.country = Options.getCountry();
 
     localStorage.setItem("mapSize", JSON.stringify(options.mapSize));
+    localStorage.setItem("country", JSON.stringify(options.country));
 
     // Mostrar los valores en consola para verificar
     console.log("Map Size:", options.mapSize);
