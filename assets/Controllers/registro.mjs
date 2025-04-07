@@ -1,18 +1,33 @@
 import User from '../../funciones/user.mjs';
-import  Helpers  from './helpers.mjs'
+import Helpers from './helpers.mjs';
 
 Helpers.loadCountries();
 
 document.querySelector("#register").addEventListener("click", async (e) => {
-    
     e.preventDefault();
 
-    let newUser = new User();
+    const nicknameInput = document.querySelector("#nickname");
+    const countrySelect = document.querySelector("#countries");
 
-    newUser.nickname = User.getNick();
+    // Validación del nickname
+    if (nicknameInput.value.trim() === "") {
+        alert("Por favor ingrese un Nickname");
+        return;
+    }
 
-    newUser.country = User.getCountry();
-})
+    // Validación del país
+    if (countrySelect.value === "" || countrySelect.value === "Click para Expandir") {
+        alert("Por favor seleccione un país");
+        return;
+    }
 
-Regist.loadCountries();
- 
+    // Crear usuario
+    const newUser = new User();
+    newUser.nickname = nicknameInput.value.trim();
+    newUser.country = countrySelect.value;
+
+    console.log("Usuario registrado:", newUser);
+});
+
+
+
