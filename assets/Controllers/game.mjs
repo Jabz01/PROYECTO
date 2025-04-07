@@ -14,6 +14,17 @@ const turnMessages = [
     "Estoy pensando...",
     "Solo una bomba más",
     "Fire in the hole!",
+    "Analizando terreno",
+    "Hora de destrozarte",
+    "Sopla Monda.txt",
+    "LOREM IMPUS 🗿",
+    "Metal_Pipe_Sound.wav",
+    "Ayer me llamo una niña...",
+    "It start with one thing",
+    "Vamo al sofa, de Miguel",
+    "Mondongo",
+    "¿Saben quien me enseño a destruir rusos?, MI MAMIIIIIIIIIIIIIIIIIIIIIII",
+    "Miguel... ¿Ese coral acaba de hablar vietnamita?"
 ]
 
 function getPoints(botBoard) {
