@@ -31,10 +31,12 @@ body {
 }
 
 
-/* Ajustar diseño de botones */
 #buttonsContainer .btn {
     width: auto; 
     padding: 10px 20px;
+    border: 1px solid #ccc; 
+    white-space: nowrap; 
+
 }
 
 @media (max-width: 768px) {
@@ -60,4 +62,3 @@ body {
 #gameBox {
     background-color: #1B4242;
 }
-

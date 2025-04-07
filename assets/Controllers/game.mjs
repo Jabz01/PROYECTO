@@ -17,7 +17,7 @@ const turnMessages = [
     "Analizando terreno",
     "Hora de destrozarte",
     "Sopla Monda.txt",
-    "LOREM IMPUS 🗿",
+    "LOREM IPSUM 🗿",
     "Metal_Pipe_Sound.wav",
     "Ayer me llamo una niña...",
     "It start with one thing",

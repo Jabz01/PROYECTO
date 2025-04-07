@@ -21,7 +21,7 @@ function renderMap()
 
 function placePiece(x,y)
 {
-    let size = sizes.pop()
+    let size = sizes[sizes.length - 1];
     if (!size)
     {
         alert("Ya no hay más barcos por colocar.");
@@ -41,7 +41,8 @@ function placePiece(x,y)
     }
 
     userMap.pieces.push(piece);
-    
+    sizes.pop();
+
     renderMap();
 }
 
