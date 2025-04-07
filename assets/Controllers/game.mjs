@@ -34,7 +34,6 @@ function getPoints(botBoard) {
 function registerPoints() {
     let points = getPoints(botBoard);
 
-    // Aquí
 }
 
 function effectiveHits(board) {
@@ -57,6 +56,7 @@ function checkForWin() {
         document.getElementById("win-overlay").classList.remove("unabled");
         document.getElementById("win-message").innerHTML = (botHits >= 19 ? "¡Ganaste! Severo tryhard" : "El bot ha ganado esta vez, pero... regresamos mañana 🤑") + "\nTienes " + getPoints(botMap) + " puntos";
         botMap.renderOn("botMap", mapSize);
+        registerPoints()
 
         return true
     }
