@@ -76,3 +76,7 @@ body {
 #weather, #turnIndicator{
     color: var(--color-light);
 }
+
+#downloadAnchorElem{
+    display: none;
+}
