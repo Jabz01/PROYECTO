@@ -37,7 +37,6 @@ body {
 {
     .boards-container {
         flex-direction: column-reverse;
-        padding-bottom: 50px;
     }
 }
 
@@ -95,4 +94,21 @@ body {
 
 #downloadAnchorElem{
     display: none;
+}
+
+.btn {
+    width: auto; 
+    margin: 20px;
+    padding: 10px 20px;
+    border: 1px solid #ccc; 
+    white-space: nowrap; 
+    background-color: #092635;
+    color: #9EC8B9;
+}
+
+@media (max-width: 800px)
+{
+    .btn {
+        margin: auto;
+    }
 }
