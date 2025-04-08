@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     exitButton.addEventListener("click", () => {
         localStorage.clear();
-        alert("LocalStorage ha sido borrado.");
 
     });
     
