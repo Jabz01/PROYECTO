@@ -3,7 +3,7 @@ import Helpers from './helpers.mjs';
 
 Helpers.loadCountries();
 
-document.querySelector("#register").addEventListener("click", async (e) => {
+document.querySelector("#register").addEventListener("click", (e) => {
     e.preventDefault();
 
     const nicknameInput = document.querySelector("#nickname");

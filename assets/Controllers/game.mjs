@@ -23,8 +23,14 @@ const turnMessages = [
     "It start with one thing",
     "Vamo al sofa, de Miguel",
     "Mondongo",
-    "¿Saben quien me enseño a destruir rusos?, MI MAMIIIIIIIIIIIIIIIIIIIIIII",
     "Miguel... ¿Ese coral acaba de hablar vietnamita?"
+]
+
+const fireMessages = [
+    "Tiro al blanco 🌋",
+    "Que es eso?... ✨",
+    "¿Saben quien me enseño a destruir rusos?, MI MAMIIIIIIIIIIIIIIIIIIIIIII",
+    "Que tirazo papaa "
 ]
 
 function getPoints(botBoard) {
@@ -105,12 +111,12 @@ function checkForWin() {
     return false
 }
 
-function takeBotTurn() {
-    document.getElementById("overlay").innerHTML = turnMessages[Math.floor(Math.random() * turnMessages.length)];
+function showOverlay(callback, fire = false) {
+    document.getElementById("overlay").innerHTML = fire ? fireMessages[Math.floor(Math.random() * fireMessages.length)] : turnMessages[Math.floor(Math.random() * turnMessages.length)];
     document.getElementById("overlay").classList.remove("unabled");
 
     setTimeout(() => {
-        launchRandomBomb(userMap, new Vector2(mapSize, mapSize))
+        callback();
 
         setTimeout(() => {
             document.getElementById("overlay").classList.add("unabled")
@@ -124,6 +130,12 @@ function takeBotTurn() {
     }, 500)
 }
 
+function takeBotTurn() {
+    showOverlay(() => {
+        launchRandomBomb(userMap, new Vector2(mapSize, mapSize))
+    })
+}
+
 function launchBombAtEnemy(x, y) {
     let bomb = launchBomb(botMap, new Vector2(x, y));
 
@@ -133,7 +145,14 @@ function launchBombAtEnemy(x, y) {
         return;
     }
 
-    takeBotTurn();
+    if (bomb.state != BombState.FIRE_IN_THE_HOLE)
+    {
+        takeBotTurn();
+    }
+    else
+    {
+        showOverlay(() => {}, true)
+    }
 }
 
 function renderBoards() {
@@ -180,3 +199,5 @@ document.addEventListener("DOMContentLoaded", () => {
     renderBoards();
     loadClimate();
 })
+
+

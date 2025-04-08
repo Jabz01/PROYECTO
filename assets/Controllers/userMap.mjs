@@ -38,6 +38,7 @@ function placePiece(x,y)
     else if (!userMap.canPlacePiece(piece))
     {
         alert("No se puede colocar el barco en esta posición.");
+        return
     }
 
     userMap.pieces.push(piece);

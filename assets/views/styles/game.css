@@ -76,3 +76,19 @@ body {
 #weather, #turnIndicator{
     color: var(--color-light);
 }
+
+#weather {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: none;
+}
+
+#weather > * {
+    margin: 0px;
+}
+
+#weather > img {
+    width: 40px;
+    width: 40px;
+}

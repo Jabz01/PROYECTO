@@ -50,7 +50,7 @@ document.querySelector("#rows").addEventListener("change", async (e) => {
 })
 
 document.querySelector(".play").addEventListener("click", async (e) => {
-
+    e.preventDefault();
     const countrySelect = document.querySelector("#countries");
 
 
@@ -59,6 +59,9 @@ document.querySelector(".play").addEventListener("click", async (e) => {
         alert("Por favor seleccione un país");
         return;
     }
+
+    console.log("enterrr");
+    
 
     // Crear una nueva instancia de Options
     let options = new Options();
@@ -73,6 +76,8 @@ document.querySelector(".play").addEventListener("click", async (e) => {
     // Mostrar los valores en consola para verificar
     console.log("Map Size:", options.mapSize);
     console.log("Country:", options.country);
+
+    window.location.href = "./userMap.html";
 });
 
 export { Options };
