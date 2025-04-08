@@ -3,6 +3,7 @@ import Vector2 from '../../funciones/vector2.mjs';
 import { launchBomb } from "./../../funciones/shoot.mjs"
 import { createBoard, launchRandomBomb } from "./../../funciones/bot.mjs"
 import { BombState } from '../../funciones/bomb.mjs';
+import { exportMapAsJSON } from '../../funciones/map-export.mjs';
 
 let mapSize = 10;
 
@@ -191,6 +192,15 @@ async function loadClimate() {
     }
 }
 
+function downloadDocument(text, name)
+{
+    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(text);
+    var dlAnchorElem = document.getElementById('downloadAnchorElem');
+    dlAnchorElem.setAttribute("href",     dataStr     );
+    dlAnchorElem.setAttribute("download", name + ".json");
+    dlAnchorElem.click();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     mapSize = JSON.parse(localStorage.getItem("mapSize")).x;
     userMap = loadBoard();
@@ -198,6 +208,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     renderBoards();
     loadClimate();
+
+    document.querySelector("#ExportButton").addEventListener('click', () =>{
+        let exportUser = exportMapAsJSON(userMap,new Vector2(mapSize, mapSize),"p1");
+        let exportBot = exportMapAsJSON(botMap,new Vector2(mapSize, mapSize),"p2");
+        downloadDocument(exportUser, "userMap");
+        downloadDocument(exportBot, "botMap");
+    })
 })
-
-
