@@ -31,7 +31,7 @@ class Board {
         return true;
     }
 
-    renderOn(mapID, mapSize, customListener = null, renderPieces = true) {
+    renderOn(mapID, mapSize, customListener = null, renderPieces = true, marDeTierra = false) {
         const mapElement = document.getElementById(mapID);
     
         if (!mapElement) {
@@ -48,6 +48,10 @@ class Board {
                 const cell = document.createElement("div");
                 cell.classList.add("cell", "a");
                 cell.classList.add((x + y) % 2 ? "even-cell" : "odd-cell", "a");
+                if (marDeTierra)
+                {
+                    cell.classList.add("bolivia");
+                }
                 cell.dataset.x = x;
                 cell.dataset.y = y;
     

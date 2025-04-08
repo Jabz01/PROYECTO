@@ -5,8 +5,9 @@ import { createBoard, launchRandomBomb } from "./../../funciones/bot.mjs"
 import { BombState } from '../../funciones/bomb.mjs';
 import { exportMapAsJSON } from '../../funciones/map-export.mjs';
 
+let marDeTierra = false;
 let mapSize = 10;
-
+let country = "";
 let userMap = null;
 let botMap = null;
 let won = false;
@@ -31,8 +32,32 @@ const fireMessages = [
     "Tiro al blanco 🌋",
     "Que es eso?... ✨",
     "¿Saben quien me enseño a destruir rusos?, MI MAMIIIIIIIIIIIIIIIIIIIIIII",
-    "Que tirazo papaa "
+    "Que tirazo papaa!",
+    "Ruso detectado 🧐",
+    "Suxuyen Bing chilling 💀🔥"
 ]
+
+const sounds = {
+    "Metal_Pipe_Sound.wav":"metal-pipe-audio",
+    "Fire in the hole!":"fire-in-the-hole",
+    "Mondongo":"mondongo",
+    "Sopla Monda.txt":"bruh",
+    "Ruso detectado 🧐":"waam",
+    "Ayer me llamo una niña...":"niña",
+    "Que tirazo papaa!":"tirazo",
+    "Suxuyen Bing chilling 💀🔥":"bing",
+    "drop":"drop",
+    "duo":"duo",
+}
+
+function play_sound_effect_for_message(message) {
+    let sound = sounds[message];
+    if (sound)
+    {
+        var audio = document.getElementById(sound);
+        audio.play();
+    }
+}
 
 function getPoints(botBoard) {
     let points = 0;
@@ -53,7 +78,7 @@ async function registerPoints(botBoard) {
     try {
         let points = getPoints(botBoard);
         let player = JSON.parse(localStorage.getItem("Player"));
-        
+
         let response = await fetch("http://127.0.0.1:5000/score-recorder", {
             method: 'POST',
             headers: {
@@ -113,7 +138,9 @@ function checkForWin() {
 }
 
 function showOverlay(callback, fire = false) {
-    document.getElementById("overlay").innerHTML = fire ? fireMessages[Math.floor(Math.random() * fireMessages.length)] : turnMessages[Math.floor(Math.random() * turnMessages.length)];
+    let message = fire ? fireMessages[Math.floor(Math.random() * fireMessages.length)] : turnMessages[Math.floor(Math.random() * turnMessages.length)];
+    play_sound_effect_for_message(message);
+    document.getElementById("overlay").innerHTML = message;
     document.getElementById("overlay").classList.remove("unabled");
 
     setTimeout(() => {
@@ -133,7 +160,7 @@ function showOverlay(callback, fire = false) {
 
 function takeBotTurn() {
     showOverlay(() => {
-        launchRandomBomb(userMap, new Vector2(mapSize, mapSize))
+        let bomb = launchRandomBomb(userMap, new Vector2(mapSize, mapSize))
     })
 }
 
@@ -146,25 +173,25 @@ function launchBombAtEnemy(x, y) {
         return;
     }
 
-    if (bomb.state != BombState.FIRE_IN_THE_HOLE)
-    {
+    if (bomb.state != BombState.FIRE_IN_THE_HOLE) {
+        play_sound_effect_for_message("drop");
         takeBotTurn();
     }
-    else
-    {
-        showOverlay(() => {}, true)
+    else {
+        play_sound_effect_for_message("duo");
+        showOverlay(() => { }, true)
     }
 }
 
 function renderBoards() {
-    userMap.renderOn("userMap", mapSize);
-    botMap.renderOn("botMap", mapSize, launchBombAtEnemy, false);
+    userMap.renderOn("userMap", mapSize, null, true, marDeTierra);
+    botMap.renderOn("botMap", mapSize, launchBombAtEnemy, false, marDeTierra);
 }
 
 async function loadClimate() {
     try {
         let country = JSON.parse(localStorage.getItem("country"))
-        const countryCode = country; 
+        const countryCode = country;
         const apiKey = "35ce21796a0bc69f80283e127c511bb5";
 
         const res = await fetch(`https://restcountries.com/v3.1/alpha/${countryCode}`);
@@ -192,26 +219,31 @@ async function loadClimate() {
     }
 }
 
-function downloadDocument(text, name)
-{
+function downloadDocument(text, name) {
     var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(text);
     var dlAnchorElem = document.getElementById('downloadAnchorElem');
-    dlAnchorElem.setAttribute("href",     dataStr     );
+    dlAnchorElem.setAttribute("href", dataStr);
     dlAnchorElem.setAttribute("download", name + ".json");
     dlAnchorElem.click();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    country = JSON.parse(localStorage.getItem("country") || "");
     mapSize = JSON.parse(localStorage.getItem("mapSize")).x;
+
+    if (country.toLowerCase() == "bo") {
+        marDeTierra = true;
+    }
+
     userMap = loadBoard();
     botMap = createBoard(userMap, new Vector2(mapSize, mapSize));
 
     renderBoards();
     loadClimate();
 
-    document.querySelector("#ExportButton").addEventListener('click', () =>{
-        let exportUser = exportMapAsJSON(userMap,new Vector2(mapSize, mapSize),"p1");
-        let exportBot = exportMapAsJSON(botMap,new Vector2(mapSize, mapSize),"p2");
+    document.querySelector("#ExportButton").addEventListener('click', () => {
+        let exportUser = exportMapAsJSON(userMap, new Vector2(mapSize, mapSize), "p1");
+        let exportBot = exportMapAsJSON(botMap, new Vector2(mapSize, mapSize), "p2");
         downloadDocument(exportUser, "userMap");
         downloadDocument(exportBot, "botMap");
     })

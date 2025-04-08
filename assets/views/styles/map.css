@@ -50,6 +50,14 @@
     background-color: #a3d7ff;
 }
 
+.cell.a.even-cell.bolivia {
+    background-color: #8b5512;
+}
+
+.cell.a.odd-cell.bolivia {
+    background-color: #462700;
+}
+
 .cell.b {
     background-color: #ffcccb;
 }
